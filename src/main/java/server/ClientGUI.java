@@ -76,11 +76,11 @@ public class ClientGUI extends JFrame{
                 String value = jtfMessage.getText();
                 jtfMessage.setText("");
                 System.out.println(value);
-                serverWindow.log.append(value);
+                serverWindow.log.append(value + "\n");
 
                 log.setForeground(Color.BLACK);
-                log.append(value);
-                saveMessages(value);
+                log.append(value + "\n");
+                saveMessages(value + "\n");
             }
 
         });
