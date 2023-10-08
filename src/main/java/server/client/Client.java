@@ -24,17 +24,17 @@ public class Client {
 
     /**
      * Сервер возьмёт имя из сообщения при первом сообщении
-     * @return
+     * @return name
      */
     public String getName() {
         return name;
 
     }
 
-    public boolean connectToServer(String name){  //TODO GUI вернёт сюда имя клиента
+    public boolean connectToServer(String name){
         this.name = name;
         if(server.connectUser(this)){
-            printText("Вы успешно подключились!!\n");
+            printText(name + "Вы успешно подключились!!\n");
             connected = true;
             String log = server.getHistory();
             if(log != null){
@@ -49,7 +49,7 @@ public class Client {
 
     /**
      * Посылаем сообщение-запрос серверу
-     * @param message
+     * @param message сообщение серверу
      */
     public void sendMessage(String message){
         if(connected){
@@ -62,7 +62,7 @@ public class Client {
     }
 
     /**
-     * Возврат ответа с сервера. Всё, что на м сервер сообщит, выводим в консоль
+     * Возврат ответа с сервера. Всё, что нам сервер сообщит, выводим в консоль
      * @param answer
      */
     public void serverAnswe(String answer){

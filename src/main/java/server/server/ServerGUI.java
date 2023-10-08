@@ -1,7 +1,5 @@
 package server.server;
 
-import server.client.Client;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;

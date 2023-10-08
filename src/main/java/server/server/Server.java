@@ -11,7 +11,6 @@ public class Server {
     public Server(Repository repository) {
         this.repositiryInterfase = new Repository();
         this.serverView = new ServerGUI(this);
-//        this.repositiryInterfase = repositiryInterfase;
     }
 
     public void connect(){

@@ -7,8 +7,6 @@ import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Spliterator;
-import java.util.function.Consumer;
 
 public class Repository  implements RepositiryInterfase, Iterable<Client> {
 
@@ -32,7 +30,7 @@ public class Repository  implements RepositiryInterfase, Iterable<Client> {
 
     @Override
     public void disconnect() {
-        if(clientList.size() != 0){
+        if(!clientList.isEmpty()){
             Iterator<Client> iterator = clientList.iterator();
             while(iterator.hasNext()){
                 Client client = iterator.next();
