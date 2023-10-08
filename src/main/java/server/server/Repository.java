@@ -37,8 +37,8 @@ public class Repository  implements RepositiryInterfase, Iterable<Client> {
             while(iterator.hasNext()){
                 Client client = iterator.next();
                 iterator.remove();
+                disconnect(client);
             }
-
         }
     }
 

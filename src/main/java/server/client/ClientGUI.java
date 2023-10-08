@@ -140,13 +140,13 @@ public class ClientGUI extends JFrame implements ClientView {
     }
 
 
-//    @Override
-//    protected void processWindowEvent(WindowEvent e){
-//        super.processWindowEvent(e);
-//        if(e.getID() == WindowEvent.WINDOW_CLOSING){
-//            disconnectFromServer();
-//        }
-//    }
+    @Override
+    protected void processWindowEvent(WindowEvent e){
+        super.processWindowEvent(e);
+        if(e.getID() == WindowEvent.WINDOW_CLOSING){
+            disconnectFromServer(client);
+        }
+    }
 
 
 }
