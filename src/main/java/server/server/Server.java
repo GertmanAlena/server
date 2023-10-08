@@ -4,15 +4,14 @@ import server.client.Client;
 
 public class Server {
 
-    private final Repository repository;
     private final ServerView serverView;
     RepositiryInterfase repositiryInterfase;
     boolean work;
 
     public Server(Repository repository) {
-        this.repository = repository;
+        this.repositiryInterfase = new Repository();
         this.serverView = new ServerGUI(this);
-        this.repositiryInterfase = repositiryInterfase;
+//        this.repositiryInterfase = repositiryInterfase;
     }
 
     public void connect(){
@@ -24,15 +23,15 @@ public class Server {
         }
     }
 
-    public void disconnect(Client client){
+    public void disconnect(){
         if (!work){
             printText("Сервер уже был остановлен");
         }
         else {
             work = false;
-                disconnectUser(client); // удаление из list
-                printText("Сервер остановлен!");
-                client.disconnect();
+            printText("Сервер остановлен!");
+            disconnectUser(null); // удаление из list
+            hideHeaderPanel(false);
         }
     }
     public boolean connectUser(Client client){
@@ -80,5 +79,7 @@ public class Server {
     public void appendLog(String text){
         serverView.appendLog(text);
     }
-
+    public void hideHeaderPanel(boolean x){
+        serverView.hideHeaderPanel(x);
+    }
 }

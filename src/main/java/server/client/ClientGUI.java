@@ -57,9 +57,9 @@ public class ClientGUI extends JFrame implements ClientView {
         appendLog(text);
     }
 
-    public void disconnectFromServer(){
+    public void disconnectFromServer(Client client){
         hideHeaderPanel(true);
-        client.disconnect();
+//        client.disconnect(client);
     }
 
     private void hideHeaderPanel(boolean visible) {
@@ -144,13 +144,13 @@ public class ClientGUI extends JFrame implements ClientView {
         return panel;
     }
 
-    @Override
-    protected void processWindowEvent(WindowEvent e){
-        super.processWindowEvent(e);
-        if(e.getID() == WindowEvent.WINDOW_CLOSING){
-            disconnectFromServer();
-        }
-    }
+//    @Override
+//    protected void processWindowEvent(WindowEvent e){
+//        super.processWindowEvent(e);
+//        if(e.getID() == WindowEvent.WINDOW_CLOSING){
+//            disconnectFromServer();
+//        }
+//    }
 
 
 }

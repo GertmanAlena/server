@@ -5,14 +5,17 @@ import server.client.Client;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.List;
 
-public class Repository  implements RepositiryInterfase  {
+public class Repository  implements RepositiryInterfase, Iterable<Client> {
 
-    public static final String LOG_PATH = "src/server/log.txt";
+    public static final String LOG_PATH = "D:\\studies\\JAVA\\Java Development Kit\\server\\src\\main\\java\\server\\log.txt";
     List<Client> clientList;
 
     public Repository() {
+
         clientList = new ArrayList<>();
     }
 
@@ -27,20 +30,20 @@ public class Repository  implements RepositiryInterfase  {
     }
     @Override
     public void disconnectUser(Client client) {
-        for (Client cl : clientList) {
-            disconnect(cl);
+        if(clientList.size() != 0){
+            for (Client cl : clientList) {
+                clientList.remove(cl);
+                disconnect(cl);
+            }
+        }else {
 
         }
     }
-    /**
-     * удаляем из list
-     * @param client
-     */
+
     public void disconnect (Client client){
-        clientList.remove(client);
-//        if (client != null){
-//            clientGUI.disconnectFromServer();
-//        }
+        if (client != null){
+            client.disconnect(client);
+        }
     }
 
     @Override
@@ -68,7 +71,9 @@ public class Repository  implements RepositiryInterfase  {
             while ((c = reader.read()) != -1){
                 stringBuilder.append((char) c);
             }
-            stringBuilder.delete(stringBuilder.length()-1, stringBuilder.length());
+            if(stringBuilder.length() != 0){
+                stringBuilder.delete(stringBuilder.length()-1, stringBuilder.length());
+            }
             return stringBuilder.toString();
         } catch (Exception e){
             e.printStackTrace();
@@ -76,4 +81,8 @@ public class Repository  implements RepositiryInterfase  {
         }
     }
 
+    @Override
+    public Iterator<Client> iterator() {
+        return new GroupIterator<>(clientList);
+    }
 }

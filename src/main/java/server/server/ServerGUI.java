@@ -16,6 +16,7 @@ public class ServerGUI extends JFrame implements ServerView{
     JTextArea log;
 
     Server server;
+    JPanel headerPanel;
 
     public ServerGUI(Server server){
         this.server = server; //TODO переделать на serverWindow.getServer
@@ -40,7 +41,7 @@ public class ServerGUI extends JFrame implements ServerView{
     }
 
     private Component createButtons() {
-        JPanel panel = new JPanel(new GridLayout(1, 2));
+        JPanel headerPanel = new JPanel(new GridLayout(1, 2));
         btnStart = new JButton("Start");
         btnStop = new JButton("Stop");
 
@@ -54,18 +55,24 @@ public class ServerGUI extends JFrame implements ServerView{
         btnStop.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                server.disconnect(null);
+                server.disconnect();
 
             }
         });
 
-        panel.add(btnStart);
-        panel.add(btnStop);
-        return panel;
+        headerPanel.add(btnStart);
+        headerPanel.add(btnStop);
+        return headerPanel;
     }
 
     public void appendLog(String text){
         log.append(text + "\n");
+    }
+
+    @Override
+    public void hideHeaderPanel(boolean x) {
+//        headerPanel.setVisible(x);
+        log.replaceSelection("");
     }
 
     @Override

@@ -69,11 +69,11 @@ public class Client {
         printText(answer);
     }
 
-    public void disconnect(){
+    public void disconnect(Client client){
         if(connected){
             connected = false;
-            clientView.disconnectFromServer();  //когда пользователя отключили, сообщаем графическому интерфейсу, что нужно вывести поля для ввода
-            server.disconnectUser(this);
+            clientView.disconnectFromServer(client);  //когда пользователя отключили, сообщаем графическому интерфейсу, что нужно вывести поля для ввода
+//            server.disconnectUser(this);
             printText("Вы были отключены от сервера!!!");
         }
     }

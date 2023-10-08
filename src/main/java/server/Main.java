@@ -12,5 +12,6 @@ public class Main {
 
         Server server = new Server(new Repository());
         new ClientGUI(server);
+        new ClientGUI(server);
     }
 }

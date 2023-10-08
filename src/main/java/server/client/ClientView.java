@@ -6,5 +6,5 @@ package server.client;
 public interface ClientView {
 
     void showMessage(String text);
-    void disconnectFromServer();
+    void disconnectFromServer(Client client);
 }
