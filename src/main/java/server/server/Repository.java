@@ -5,9 +5,10 @@ import server.client.Client;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.util.ArrayList;
-import java.util.ConcurrentModificationException;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Spliterator;
+import java.util.function.Consumer;
 
 public class Repository  implements RepositiryInterfase, Iterable<Client> {
 
@@ -18,26 +19,9 @@ public class Repository  implements RepositiryInterfase, Iterable<Client> {
 
         clientList = new ArrayList<>();
     }
-
+    @Override
     public String getHistory() {
         return readLog();
-    }
-
-    public void sendMessage(String text){
-        text += "";
-        answerAll(text);
-        saveInLog(text);
-    }
-    @Override
-    public void disconnectUser(Client client) {
-        if(clientList.size() != 0){
-            for (Client cl : clientList) {
-                clientList.remove(cl);
-                disconnect(cl);
-            }
-        }else {
-
-        }
     }
 
     public void disconnect (Client client){
@@ -47,15 +31,33 @@ public class Repository  implements RepositiryInterfase, Iterable<Client> {
     }
 
     @Override
+    public void disconnect() {
+        if(clientList.size() != 0){
+            Iterator<Client> iterator = clientList.iterator();
+            while(iterator.hasNext()){
+                Client client = iterator.next();
+                iterator.remove();
+            }
+
+        }
+    }
+
+    @Override
     public void addList(Client client) {
         clientList.add(client);
     }
-
+    @Override
     public void answerAll(String text){
-        for (Client clientGUI: clientList){
-//            clientGUI.answer(text);
+        for (Client client: clientList){
+//            client.answer(text);
         }
     }
+    public void sendMessage(String text){
+        text += "";
+        answerAll(text);
+        saveInLog(text);
+    }
+    @Override
     public void saveInLog(String text){
         try (FileWriter writer = new FileWriter(LOG_PATH, true)){
             writer.write(text);
@@ -85,4 +87,6 @@ public class Repository  implements RepositiryInterfase, Iterable<Client> {
     public Iterator<Client> iterator() {
         return new GroupIterator<>(clientList);
     }
+
+
 }

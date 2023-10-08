@@ -30,7 +30,7 @@ public class Server {
         else {
             work = false;
             printText("Сервер остановлен!");
-            disconnectUser(null); // удаление из list
+            disconnectUser(); // удаление из list
             hideHeaderPanel(false);
         }
     }
@@ -66,8 +66,8 @@ public class Server {
         repositiryInterfase.saveInLog(text);
     }
 
-    public void disconnectUser(Client client){
-        repositiryInterfase.disconnectUser(client);
+    public void disconnectUser(){
+        repositiryInterfase.disconnect();
     }
 
     public void printText(String text){

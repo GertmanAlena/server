@@ -12,12 +12,6 @@ import java.awt.event.*;
  */
 public class ClientGUI extends JFrame implements ClientView {
 
-    //TODO servew Window разделить на
-    // Repository -
-    // Interfase -
-    // Server -
-    // ServerWindow -
-    // ServerView как и ClientView
     private static final int WIDTH = 400;
     private static final int HEIGHT = 300;
 
@@ -31,12 +25,11 @@ public class ClientGUI extends JFrame implements ClientView {
     private Client client;
 
     public ClientGUI(Server server){
-        this.client = new Client(this, server); //TODO переделать на serverWindow.getServer
+        this.client = new Client(this, server);
         setSize(WIDTH, HEIGHT);
         setResizable(false);
         setTitle("Chat client");
         setSize(WIDTH, HEIGHT);
-//        setLocation(server.getX() - 500, server.getY());
         createPanel();
         setVisible(true);
     }
@@ -52,15 +45,6 @@ public class ClientGUI extends JFrame implements ClientView {
     /**
      * Ответ от сервера
      */
-    @Override
-    public void showMessage(String text) {
-        appendLog(text);
-    }
-
-    public void disconnectFromServer(Client client){
-        hideHeaderPanel(true);
-//        client.disconnect(client);
-    }
 
     private void hideHeaderPanel(boolean visible) {
         headerPanel.setVisible(visible);
@@ -143,6 +127,18 @@ public class ClientGUI extends JFrame implements ClientView {
         panel.add(btnSend, BorderLayout.EAST);
         return panel;
     }
+
+    @Override
+    public void showMessage(String text) {
+        appendLog(text);
+    }
+
+    @Override
+    public void disconnectFromServer(Client client) {
+        hideHeaderPanel(true);
+        client.disconnect(client);
+    }
+
 
 //    @Override
 //    protected void processWindowEvent(WindowEvent e){

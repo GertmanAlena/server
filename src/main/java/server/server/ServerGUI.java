@@ -19,7 +19,7 @@ public class ServerGUI extends JFrame implements ServerView{
     JPanel headerPanel;
 
     public ServerGUI(Server server){
-        this.server = server; //TODO переделать на serverWindow.getServer
+        this.server = server;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
         setResizable(false);
