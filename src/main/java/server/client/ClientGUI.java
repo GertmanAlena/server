@@ -1,14 +1,10 @@
 package server.client;
 
-import jdk.swing.interop.SwingInterOpUtils;
 import server.server.Server;
-import server.server.ServerGUI;
 
 import javax.swing.*;
-import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.awt.*;
 import java.awt.event.*;
-import java.sql.SQLOutput;
 
 /**
  * Работа с графическим интерфейсом (всё, что относится к панелям)
@@ -25,7 +21,7 @@ public class ClientGUI extends JFrame implements ClientView {
     JButton btnLogin, btnSend;
     JPanel headerPanel;
 
-    private Client client;
+    private final Client client;
 
     public ClientGUI(Server server){
         this.client = new Client(this, server);
@@ -93,7 +89,7 @@ public class ClientGUI extends JFrame implements ClientView {
     /**
      * Создание центральной панельки
      * setEnabled(false) недоступна для редактирования
-     * @return
+     * @return элемент панели JTextArea()
      */
     private Component createLog() {
         log = new JTextArea();
@@ -143,7 +139,7 @@ public class ClientGUI extends JFrame implements ClientView {
     }
 
     /**
-     * по ID отключает клиента
+     * По ID отключает клиента
      * @param e  the window event
      */
     @Override
