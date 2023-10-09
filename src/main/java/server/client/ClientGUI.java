@@ -1,11 +1,14 @@
 package server.client;
 
+import jdk.swing.interop.SwingInterOpUtils;
 import server.server.Server;
 import server.server.ServerGUI;
 
 import javax.swing.*;
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLOutput;
 
 /**
  * Работа с графическим интерфейсом (всё, что относится к панелям)
@@ -68,10 +71,10 @@ public class ClientGUI extends JFrame implements ClientView {
     }
     private Component createTopPanel(){
         headerPanel = new JPanel(new GridLayout(2, 3));
-        jtfHost = new JTextField();
-        jtfPort = new JTextField();
-        jtfPassword = new JPasswordField();
-        jtfLogin = new JTextField();
+        jtfHost = new JTextField("127.0.0.1");
+        jtfPort = new JTextField("8080");
+        jtfPassword = new JPasswordField("123");
+        jtfLogin = new JTextField("login");
         btnLogin = new JButton("login");
         btnLogin.addActionListener(new ActionListener() {
             @Override
@@ -139,7 +142,10 @@ public class ClientGUI extends JFrame implements ClientView {
         client.disconnect(client);
     }
 
-
+    /**
+     * по ID отключает клиента
+     * @param e  the window event
+     */
     @Override
     protected void processWindowEvent(WindowEvent e){
         super.processWindowEvent(e);

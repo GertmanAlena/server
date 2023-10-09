@@ -13,8 +13,8 @@ public class Server {
         this.serverView = new ServerGUI(this);
     }
 
-    public void connect(){
-        if (work){
+    public void connect() {
+        if (work) {
             printText("Сервер уже был запущен");
         } else {
             work = true;
@@ -22,63 +22,68 @@ public class Server {
         }
     }
 
-    public void disconnect(){
-        if (!work){
+    public void disconnect() {
+        if (!work) {
             printText("Сервер уже был остановлен");
-        }
-        else {
+        } else {
             work = false;
             printText("Сервер остановлен!");
             disconnectUser(); // удаление из list
             hideHeaderPanel(false);
         }
     }
-    public boolean connectUser(Client client){
-        if (!work){
+
+    public boolean connectUser(Client client) {
+        if (!work) {
             return false;
         }
         addList(client);
         return true;
     }
 
-    public void sendMessage(String text){
-        if (!work){
+    public void sendMessage(String text) {
+        if (!work) {
             return;
         }
         appendLog(text);
         answerAll(text);
         saveInLog(text);
     }
+
     public String getHistory() {
         return getHistoryRepo();
     }
 
-    public String getHistoryRepo(){
+    public String getHistoryRepo() {
 
         return repositiryInterfase.getHistory();
     }
 
-    public void answerAll(String text){
-        repositiryInterfase.answerAll(text);
+    public void answerAll(String text) {
+        serverView.answerAll(text);
     }
-    public void saveInLog(String text){
+
+    public void saveInLog(String text) {
         repositiryInterfase.saveInLog(text);
     }
 
-    public void disconnectUser(){
-        repositiryInterfase.disconnect();
+    public void disconnectUser() {
+        serverView.disconnect();
     }
 
-    public void printText(String text){
+    public void printText(String text) {
         serverView.showMessage(text);
     }
-    public void addList(Client client){
-        repositiryInterfase.addList(client);
+
+    public void addList(Client client) {
+        serverView.addList(client);
     }
-    public void appendLog(String text){
+
+    public void appendLog(String text) {
         serverView.appendLog(text);
     }
-    public void hideHeaderPanel(boolean x){
+
+    public void hideHeaderPanel(boolean x) {
         serverView.hideHeaderPanel(x);
     }
 }

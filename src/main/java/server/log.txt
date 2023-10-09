@@ -1,24 +1,8 @@
 
-sdcs:scsdc
-sdcs:sdcsd
-gymgy:gymgm
-fgbfg:aaaaaaaaaaaaaaaaaaaaaaaaaaa
-dfvdfv:ddf111
-oooo:ooo
-dfvdfv:dfv
-xdb:bxdb
-dfv:dfvv
-rtg:rtgrt
-апип:апиапи
-вам:вам
-вам:вамвам
-dfv:dvf
-dfv:dfv
-dfv:dfv
-dfv:dfv
-вам:вам
-dfv:dfvfv
-fv:dfv
-sdc:sdc
-sdc:sdc
-ь:вама
+login:привет
+login:hi
+login:ещё раз
+login:hi
+второй:привет
+1:ку
+2:ку

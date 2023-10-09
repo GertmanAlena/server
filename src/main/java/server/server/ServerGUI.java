@@ -1,11 +1,16 @@
 package server.server;
 
+import server.client.Client;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
-public class ServerGUI extends JFrame implements ServerView{
+public class ServerGUI extends JFrame implements ServerView, Iterable<Client> {
 
     public static final int WIDTH = 400;
     public static final int HEIGHT = 300;
@@ -15,8 +20,10 @@ public class ServerGUI extends JFrame implements ServerView{
 
     Server server;
     JPanel headerPanel;
+    List<Client> clientList;
 
-    public ServerGUI(Server server){
+    public ServerGUI(Server server) {
+        clientList = new ArrayList<>();
         this.server = server;
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setSize(WIDTH, HEIGHT);
@@ -63,7 +70,7 @@ public class ServerGUI extends JFrame implements ServerView{
         return headerPanel;
     }
 
-    public void appendLog(String text){
+    public void appendLog(String text) {
         log.append(text + "\n");
     }
 
@@ -78,7 +85,33 @@ public class ServerGUI extends JFrame implements ServerView{
         appendLog(text);
     }
 
+    @Override
+    public void disconnect() {
+        if (!clientList.isEmpty()) {
+            Iterator<Client> iterator = clientList.iterator();
+            while (iterator.hasNext()) {
+                Client client = iterator.next();
+                iterator.remove();
+                client.disconnect(client);
+            }
+        }
+    }
 
+    @Override
+    public void addList(Client client) {
+        clientList.add(client);
+    }
 
+    @Override
+    public void answerAll(String text) {
+        for (Client client : clientList) {
+            client.serverAnswe(text);
+        }
+    }
+
+    @Override
+    public Iterator<Client> iterator() {
+        return new GroupIterator<>(clientList);
+    }
 
 }
